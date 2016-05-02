@@ -1,0 +1,28 @@
+"""
+Ders için açtığım hesapta çalıştı ancak aşağıdaki hesaplarda sanırım bazı karakterler için UnicodeEncodeError hatası veriyor. 
+Nasıl çözüleceğini bulamadım.
+"""
+import tweepy
+
+CONSUMER_KEY = 'A1wJ0ktK26xiDHnhYYjyBEcDL'
+CONSUMER_SECRET = 'rxVa2gCnbUlFwv5X4FWcbkPfqDZQLSUcbSmCKt4nWlfk34Vzwe'
+ACCESS_KEY = '706851146418278400-bK0ML9PPlkB59vFkv5lWx5ZgCsDH8H6'
+ACCESS_SECRET = 'pxK6Xdmi0TijQj9c1bTsrcewzGPbH7HaWmsJX62I0xibB'
+
+twitter = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+twitter.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+api = tweepy.API(twitter)
+
+user_list=["FAybilir","Sheldonoskopi","sercanmadas","emrefedai","ali_tutus","Gorkemcn","saaricocuk","yusuf87953876",
+           "c1515x","sahinsahhin","TalhaAtesyakar","nezir0104","halilhalil16","EsenRuzgar1975","eglenceeeeee","nezir0104",
+           "ilkertek12","AHMETKARA1987","Enes3079","GokhanAtes1","zihnikalayci","HsnTkli","Cagatay_Kaya","venbeyyatirim",
+           "rslnlbnt","ErkannazliiNazl","BayrakGokce","cemilevuraRT","EmreSahin41","TmrSrht","mehmetvicir","mehmetxakdogan",
+           "aralik34","Ofansifsolbek","adilozdemir10","merkepfromhell","mhmtcnplt","MuhsinMacit","ve_li07","maximillan_1966",
+           "AlpayKele","arslan_arif_m","E_Rusd","randomseverimby","tugbacin","ertugrulseven","mukailkucuk"]
+for username in user_list:
+    #username = input("Please enter the twitter username: ")
+    stuff = api.user_timeline(screen_name = username, count = 3000)
+    user=api.get_user(screen_name=username)
+    for status in stuff:
+        f= open("C:/Users/Orhan/Desktop/UsersTimelines/"+str(user.id)+".txt","a")
+        f.write(status.text+"\n")
